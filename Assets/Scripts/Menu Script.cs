@@ -1,4 +1,4 @@
-using UnityEditor;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +8,7 @@ public class MenuScript : MonoBehaviour
     public GameObject settingsMenu;
 
     public GameObject pauseMenu;
+    public GameObject levelMenu;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,6 +39,10 @@ public class MenuScript : MonoBehaviour
         }
     }
 
+    public void LevelMenu(bool pLevelBool) {
+        levelMenu.SetActive(pLevelBool);
+    }
+
     public void ReturnToMainMenu() {
         Time.timeScale= 1;
         SceneManager.LoadScene("Main Menu");
@@ -46,7 +51,8 @@ public class MenuScript : MonoBehaviour
     public void Exit() {
         Application.Quit();
     }
-//  Old functions
+    // Old functions
+    [Obsolete]
     public void InstantiateSettingsMenu()
     {
         GameObject oldMenu = GameObject.FindWithTag("currentMenu");
@@ -55,7 +61,7 @@ public class MenuScript : MonoBehaviour
         settingsMenu.tag = "currentMenu";
         settingsMenu.SetActive(true);
     }
-
+    [Obsolete]
     public void InstantiateMainMenu()
     {
         GameObject oldMenu = GameObject.FindWithTag("currentMenu");
