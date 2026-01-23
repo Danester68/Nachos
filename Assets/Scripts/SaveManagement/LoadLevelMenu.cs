@@ -13,6 +13,11 @@ public class LoadLevelMenu : MonoBehaviour
     
     public SaveLoadLevel saveLoadLevel;
 
+    void Awake()
+    {
+        LoadLevels();
+    }
+
     void Start()
     {
         LoadLevels();
@@ -37,6 +42,10 @@ public class LoadLevelMenu : MonoBehaviour
                 button.interactable = false;
             }
         }
+        if (gameObject.activeInHierarchy)
+        {
+            LoadLevels();
+        }
     }
 
     public void LoadLevels()
@@ -44,17 +53,24 @@ public class LoadLevelMenu : MonoBehaviour
         LevelSaves levelSaves = saveLoadLevel.GetLevelSaves();
         List<LevelSave> saves = levelSaves.saves;
         int lastIndex = 0;
-        for (int i = 0; i > saves.Count; i++)
+        if (saves.Count > 0)
         {
-            lastIndex = i;
-            LevelSave levelSave = saves[i];
-            levelTexts[i].text = "Level Save " + (i + 1);
-            loadButtons[i].interactable = true;
-            levelSlots[i].tag = "LevelSlot";
+            for (int i = 0; i < saves.Count; i++)
+            {
+                lastIndex = i;
+                levelTexts[i].text = "Level Save " + (i + 1);
+                loadButtons[i].interactable = true;
+                Debug.Log(i);
+                levelSlots[i].tag = "LevelSlot";
+            }
         }
-        if (!(lastIndex >= 5))
+        else
         {
-            for (int i = lastIndex; i > 5; i++)
+            lastIndex = -1;
+        }
+        if (!(lastIndex >= 4))
+        {
+            for (int i = lastIndex + 1; i < 5; i++)
             {
                 levelTexts[i].text = "Empty Slot";
                 loadButtons[i].interactable = false;

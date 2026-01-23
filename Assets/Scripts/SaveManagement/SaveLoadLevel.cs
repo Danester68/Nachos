@@ -62,6 +62,7 @@ public class SaveLoadLevel : MonoBehaviour
 
     public void SaveLevel()
     {
+        Debug.Log("Saving new level in file" + filePath);
         LevelSaves levelSaves = GetLevelSaves();
         if (levelSaves.saves.Count >= 5)
         {
@@ -97,12 +98,14 @@ public class SaveLoadLevel : MonoBehaviour
         {
             streamWriter.WriteLine(jsonContent);
         }
+        Debug.Log("Succeeded at saving level");
     }
 
     public void LoadLevel(int level)
     {
+        Debug.Log("Loading level " + level + " from file " + filePath);
         player.position = new Vector3(player.position.x, 4.59f, player.position.z);
-        for (int i = 0; i > levelGameObject.transform.childCount; i++)
+        for (int i = 0; i < levelGameObject.transform.childCount; i++)
         {
             Destroy(levelGameObject.transform.GetChild(i).gameObject);
         }
@@ -113,7 +116,7 @@ public class SaveLoadLevel : MonoBehaviour
         }
         LevelSave levelSave = JsonUtility.FromJson<LevelSaves>(jsonContent).saves[level];
         List<Object> objects = levelSave.objects;
-        for (int i = 0; i > objects.Count; i++)
+        for (int i = 0; i < objects.Count; i++)
         {
             Object levelObject = objects[i];
             switch (levelObject.type)
@@ -156,10 +159,12 @@ public class SaveLoadLevel : MonoBehaviour
         GameObject lettuce = Instantiate(lettuceGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
         lettuce.name = "Lettuce";
         lettuce.transform.SetParent(levelGameObject.transform);
+        Debug.Log("Succeeded at loading level");
     }
 
     public void DeleteLevel(int level)
     {
+        Debug.Log("Deleting level " + level + " from file " + filePath);
         LevelSaves levelSaves = GetLevelSaves();
         levelSaves.saves.RemoveAt(level);
         string jsonContent = JsonUtility.ToJson(levelSaves);
@@ -167,6 +172,7 @@ public class SaveLoadLevel : MonoBehaviour
         {
             streamWriter.WriteLine(jsonContent);
         }
+        Debug.Log("Succeeded at deleting level");
     }
 }
 

@@ -160,7 +160,7 @@ MonoBehaviour:
   cheeseGameObject: {fileID: 8492319130866696887, guid: a1c6955a36b53264c9d6411e7ea591f3, type: 3}
   lettuceGameObject: {fileID: 8492319130866696887, guid: abc769eb6ff28c64aaa27d6e5beeb4b3, type: 3}
   saveLevelButton: {fileID: 805854629}
-  ingredientRange: 32
+  ingredientRange: 115
 --- !u!4 &244868566
 Transform:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ Transform:
   m_GameObject: {fileID: 370557903}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57.4, y: 15.2241, z: -559.9373}
+  m_LocalPosition: {x: 130, y: 15.2241, z: -559.9373}
   m_LocalScale: {x: 0.6847, y: 35.4879, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -949,10 +949,6 @@ PrefabInstance:
       propertyPath: saveLoadLevel
       value: 
       objectReference: {fileID: 244868565}
-    - target: {fileID: 4336587508078790505, guid: f008a6599f0b0f742b83adc98eb78201, type: 3}
-      propertyPath: levelSlots.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5974985319427733077, guid: f008a6599f0b0f742b83adc98eb78201, type: 3}
       propertyPath: m_Name
       value: Level Menu
@@ -999,7 +995,7 @@ Transform:
   m_GameObject: {fileID: 1320604421}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -61.6, y: 15.13, z: -559.9373}
+  m_LocalPosition: {x: -130, y: 15.13, z: -559.9373}
   m_LocalScale: {x: 1, y: 35.0001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1641,8 +1637,8 @@ MonoBehaviour:
   Cheese: {fileID: 8492319130866696887, guid: a1c6955a36b53264c9d6411e7ea591f3, type: 3}
   Lettuce: {fileID: 8492319130866696887, guid: abc769eb6ff28c64aaa27d6e5beeb4b3, type: 3}
   Oven: {fileID: 3810644236930131895, guid: 1864b40eb7776cc4082aefdf02a848e6, type: 3}
-  range: 64
-  ingredientRange: 50
+  range: 175
+  ingredientRange: 115
 --- !u!4 &2108558125
 Transform:
   m_ObjectHideFlags: 0

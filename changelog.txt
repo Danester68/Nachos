@@ -1,3 +1,4 @@
-Changelog for v2.0
--Added 6 ingredients you need to collect: Chips, Tomatoes, Onions, Meat, Cheese, and Lettuce!
--Added an oven.
+Changelog for v3.0
+-Added a level saving system
+-Expanded map area
+-Changed cursor texture
