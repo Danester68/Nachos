@@ -60,7 +60,6 @@ public class LoadLevelMenu : MonoBehaviour
                 lastIndex = i;
                 levelTexts[i].text = "Level Save " + (i + 1);
                 loadButtons[i].interactable = true;
-                Debug.Log(i);
                 levelSlots[i].tag = "LevelSlot";
             }
         }
