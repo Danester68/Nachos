@@ -18,4 +18,19 @@ public class MobileControls : MonoBehaviour
     {
         
     }
+
+    public void OnMovementKeyPress(MovementKey movementKey)
+    {
+        switch (movementKey)
+        {
+            
+        }
+    }
+}
+
+public enum MovementKey
+{
+    Left,
+    Right,
+    Jump
 }
