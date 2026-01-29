@@ -3,10 +3,13 @@ using UnityEngine;
 public class MobileControls : MonoBehaviour
 {
     [SerializeField] GameObject mobileControlsObject;
+    bool isHeldLeft;
+    bool isHeldRight;
+    bool isHeldJump;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        #if UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL || UNITY_EDITOR
             mobileControlsObject.SetActive(true);
         #else
             mobileControlsObject.SetActive(false);
@@ -16,14 +19,49 @@ public class MobileControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (isHeldLeft)
+        {
+            
+        }
+        if (isHeldRight)
+        {
+            
+        }
+        if (isHeldJump)
+        {
+            
+        }
     }
 
-    public void OnMovementKeyPress(MovementKey movementKey)
+    public void OnMovementKeyDown(MovementKey movementKey)
     {
         switch (movementKey)
         {
-            
+            case MovementKey.Left:
+                isHeldLeft = true;
+                break;
+            case MovementKey.Right:
+                isHeldRight = true;
+                break;
+            case MovementKey.Jump:
+                isHeldJump = true;
+                break;
+        }
+    }
+
+    public void OnMovementKeyUp(MovementKey movementKey)
+    {
+        switch (movementKey)
+        {
+            case MovementKey.Left:
+                isHeldLeft = false;
+                break;
+            case MovementKey.Right:
+                isHeldRight = false;
+                break;
+            case MovementKey.Jump:
+                isHeldJump = false;
+                break;
         }
     }
 }
