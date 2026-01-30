@@ -23,6 +23,9 @@ public class PlayerMove : MonoBehaviour
     private bool hasCheese = false;
     private bool hasLettuce = false;
     private bool hasAll = false;
+
+    private bool mobileControlsInUse = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +34,10 @@ public class PlayerMove : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            mobileControlsInUse = false;
+        }
         if (hasChip && hasTomato && hasOnion && hasMeat && hasCheese && hasLettuce) {
             hasAll = true;
         }
@@ -41,14 +48,12 @@ public class PlayerMove : MonoBehaviour
         //if (plrRigidbody.velocity.y == 0) {
         //    jump();
         //}
-        jump();
-        horiz = Input.GetAxis("Horizontal");
+        if (mobileControlsInUse == false) {
+            horiz = Input.GetAxis("Horizontal");
+            verti = Input.GetAxis("Vertical");
+        }
         Vector3 move = new Vector3(horiz * speed, verti * jumpHeight);
         transform.position += move * Time.deltaTime;
-    }
-
-    void jump() {
-        verti = Input.GetAxis("Vertical");
     }
     
     void OnTriggerEnter2D(Collider2D collider) {
@@ -86,5 +91,16 @@ public class PlayerMove : MonoBehaviour
                 }
                 break;
         }
+    }
+    public void SetPlayerMoveMobile(float x, float y)
+    {
+        mobileControlsInUse = true;
+        horiz = x;
+        verti = y;
+    }
+    public void ResetPlayerMoveMobile()
+    {
+        horiz = 0;
+        verti = 0;
     }
 }

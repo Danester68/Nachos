@@ -52,6 +52,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,6 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -189,8 +192,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3969041318819509467}
   - component: {fileID: 6460073751654097961}
-  - component: {fileID: 963223683663045880}
   - component: {fileID: 5793126503728282709}
+  - component: {fileID: 2507314008025006400}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -265,7 +268,22 @@ PolygonCollider2D:
       - {x: -1.532085, y: -2.1654649}
       - {x: 1.7953823, y: -2.1822515}
   m_UseDelaunayMesh: 0
---- !u!50 &963223683663045880
+--- !u!114 &5793126503728282709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4754279851427870784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cf3c4229dd43b048b7e1f3a1d9172c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finishMenu: {fileID: 0}
+  speed: 8
+  jumpHeight: 12
+--- !u!50 &2507314008025006400
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -291,19 +309,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &5793126503728282709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4754279851427870784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cf3c4229dd43b048b7e1f3a1d9172c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  finishMenu: {fileID: 0}
-  speed: 8
-  jumpHeight: 12
+  m_Constraints: 0
