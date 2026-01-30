@@ -62,7 +62,7 @@ public class SaveLoadLevel : MonoBehaviour
 
     public void SaveLevel()
     {
-        Debug.Log("Saving new level in file" + filePath);
+        Debug.Log("Saving new level in file " + filePath);
         LevelSaves levelSaves = GetLevelSaves();
         if (levelSaves.saves.Count >= 5)
         {
