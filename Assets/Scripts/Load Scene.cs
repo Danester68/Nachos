@@ -18,7 +18,11 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void LoadMainGame() {
+    public void LoadMainGame(bool loadLastLevel = false) {
+        if (loadLastLevel)
+        {
+            GameParameters.resumeLastLevel = true;
+        }
         SceneManager.LoadScene(1);
     }
 }

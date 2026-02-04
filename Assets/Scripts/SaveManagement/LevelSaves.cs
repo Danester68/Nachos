@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class LevelSaves
 {
     public List<LevelSave> saves;
+    public LevelSave lastLevel;
 }
 
 [Serializable]

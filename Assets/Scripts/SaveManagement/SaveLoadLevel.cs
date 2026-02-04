@@ -60,11 +60,11 @@ public class SaveLoadLevel : MonoBehaviour
         return levelSaves;
     }
 
-    public void SaveLevel()
+    public void SaveLevel(bool isLastLevel = false)
     {
         Debug.Log("Saving new level in file " + filePath);
         LevelSaves levelSaves = GetLevelSaves();
-        if (levelSaves.saves.Count >= 5)
+        if (levelSaves.saves.Count >= 5 && !isLastLevel)
         {
             throw new IndexOutOfRangeException("Cannot save level: No slots available");
         }
@@ -92,7 +92,14 @@ public class SaveLoadLevel : MonoBehaviour
         ovenObject.position = oven.transform.position.x;
         objects.Add(ovenObject);
         levelSave.objects = objects;
-        levelSaves.saves.Add(levelSave);
+        if (isLastLevel)
+        {
+            levelSaves.lastLevel = levelSave;
+        }
+        else
+        {
+            levelSaves.saves.Add(levelSave);
+        }
         string jsonContent = JsonUtility.ToJson(levelSaves);
         using (StreamWriter streamWriter = File.CreateText(filePath))
         {
@@ -101,7 +108,7 @@ public class SaveLoadLevel : MonoBehaviour
         Debug.Log("Succeeded at saving level");
     }
 
-    public void LoadLevel(int level)
+    public void LoadLevel(int level = 0, bool isLastLevel = false)
     {
         Debug.Log("Loading level " + level + " from file " + filePath);
         player.position = new Vector3(player.position.x, 4.59f, player.position.z);
@@ -114,12 +121,20 @@ public class SaveLoadLevel : MonoBehaviour
         {
             jsonContent = streamReader.ReadToEnd();
         }
-        LevelSave levelSave = JsonUtility.FromJson<LevelSaves>(jsonContent).saves[level];
+        LevelSave levelSave;
+        if (isLastLevel)
+        {
+            levelSave = JsonUtility.FromJson<LevelSaves>(jsonContent).lastLevel;
+        }
+        else
+        {
+            levelSave = JsonUtility.FromJson<LevelSaves>(jsonContent).saves[level];
+        }
         List<Object> objects = levelSave.objects;
+        bool ovenExists = false;
         for (int i = 0; i < objects.Count; i++)
         {
             Object levelObject = objects[i];
-            bool ovenExists = false;
             switch (levelObject.type)
             {
                 case ObjectType.Tree:
@@ -133,6 +148,7 @@ public class SaveLoadLevel : MonoBehaviour
                     bush.transform.SetParent(levelGameObject.transform);
                     break;
                 case ObjectType.Oven:
+                    Debug.Log("1");
                     GameObject oven = Instantiate(ovenGameObject, new Vector3(levelObject.position, -3f,-1), new Quaternion());
                     oven.name = "Oven";
                     oven.transform.SetParent(levelGameObject.transform);
@@ -141,10 +157,10 @@ public class SaveLoadLevel : MonoBehaviour
                 default:
                     throw new IncorrectFileStructureException("Invalid object type. Object: " + i + ", Level: " + level);
             }
-            if (!ovenExists)
-            {
-                throw new IncorrectFileStructureException("No oven in level. Level: " + level);
-            }
+        }
+        if (!ovenExists)
+        {
+            throw new IncorrectFileStructureException("No oven in level. Level: " + level);
         }
         // Ingredients are not yet stored in saves, remove this code chunk once feature is implemented
         GameObject chip = Instantiate(chipGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f, -1), new Quaternion());
@@ -166,6 +182,7 @@ public class SaveLoadLevel : MonoBehaviour
         lettuce.name = "Lettuce";
         lettuce.transform.SetParent(levelGameObject.transform);
         Debug.Log("Succeeded at loading level");
+        GameParameters.resumeLastLevel = false;
     }
 
     public void DeleteLevel(int level)

@@ -9,18 +9,6 @@ public class MenuScript : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject levelMenu;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void LoadMainMenu() {
         SceneManager.LoadScene("Main Menu");
@@ -44,7 +32,7 @@ public class MenuScript : MonoBehaviour
     }
 
     public void ReturnToMainMenu() {
-        Time.timeScale= 1;
+        Time.timeScale = 1;
         SceneManager.LoadScene("Main Menu");
     }
 

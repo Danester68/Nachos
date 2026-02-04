@@ -2284,6 +2284,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5422308552474622736, guid: 84f9c8b2b951d494a87f91fa7f8e69f9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5422308552474622736, guid: 84f9c8b2b951d494a87f91fa7f8e69f9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 244868565}
@@ -2539,6 +2543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de79112e97536e445a7fc61cec9fd11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveLoadLevel: {fileID: 244868565}
   LevelObj: {fileID: 2108558123}
   Tree: {fileID: 7387213494747222822, guid: 163e982a7500ddd44981fcba4d886378, type: 3}
   Bush: {fileID: 6991414452400767094, guid: 925c3c90c72c88946a0b03f03a3ab153, type: 3}
