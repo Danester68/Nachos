@@ -119,6 +119,7 @@ public class SaveLoadLevel : MonoBehaviour
         for (int i = 0; i < objects.Count; i++)
         {
             Object levelObject = objects[i];
+            bool ovenExists = false;
             switch (levelObject.type)
             {
                 case ObjectType.Tree:
@@ -135,9 +136,14 @@ public class SaveLoadLevel : MonoBehaviour
                     GameObject oven = Instantiate(ovenGameObject, new Vector3(levelObject.position, -3f,-1), new Quaternion());
                     oven.name = "Oven";
                     oven.transform.SetParent(levelGameObject.transform);
+                    ovenExists = true;
                     break;
                 default:
                     throw new IncorrectFileStructureException("Invalid object type. Object: " + i + ", Level: " + level);
+            }
+            if (!ovenExists)
+            {
+                throw new IncorrectFileStructureException("No oven in level. Level: " + level);
             }
         }
         // Ingredients are not yet stored in saves, remove this code chunk once feature is implemented
