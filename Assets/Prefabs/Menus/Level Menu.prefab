@@ -4350,7 +4350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Confirm Delete
+  m_text: Confirm Delete (Hold)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11d0d436f6942134e8d6ad21e5491ea0, type: 2}
   m_sharedMaterial: {fileID: 6606625353487037816, guid: 11d0d436f6942134e8d6ad21e5491ea0, type: 2}
