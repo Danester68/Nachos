@@ -86,6 +86,7 @@ public class LoadLevelMenu : MonoBehaviour
     public void DeleteLevel(int level)
     {
         saveLoadLevel.DeleteLevel(level);
+        deleteButtons[level].interactable = false;
         LoadLevels();
     }
 }
