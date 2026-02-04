@@ -10,11 +10,22 @@ public class LoadLevelMenu : MonoBehaviour
     public List<TextMeshProUGUI> levelTexts;
     public List<Button> loadButtons;
     public List<Button> deleteButtons;
+    [SerializeField] GameObject deleteInstructions;
+    [SerializeField] GameObject confirmDeleteButton;
     
     public SaveLoadLevel saveLoadLevel;
 
+    private bool isConfirmDeleteHeld;
+
     void Awake()
     {
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL || UNITY_EDITOR
+            deleteInstructions.SetActive(false);
+            confirmDeleteButton.SetActive(true);
+        #else
+            deleteInstructions.SetActive(true);
+            confirmDeleteButton.SetActive(false);
+        #endif
         LoadLevels();
     }
 
@@ -25,7 +36,7 @@ public class LoadLevelMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || isConfirmDeleteHeld)
         {
             foreach (Button button in deleteButtons)
             {
@@ -88,5 +99,10 @@ public class LoadLevelMenu : MonoBehaviour
         saveLoadLevel.DeleteLevel(level);
         deleteButtons[level].interactable = false;
         LoadLevels();
+    }
+
+    public void UpdateConfirmDeleteButtonState(bool state)
+    {
+        isConfirmDeleteHeld = state;
     }
 }
