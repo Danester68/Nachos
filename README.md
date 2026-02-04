@@ -1,6 +1,6 @@
 # Nachos
 The Nachos game.<br/>
-Version: v3.0.
+Version: v4.0.
 <a href="changelog.txt">View changelog</a>
 # About game
 A platformer based around the popular food Nachos! Collect all the ingredients and bake them to advance to the next level!
