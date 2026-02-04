@@ -1,4 +1,4 @@
-Changelog for v3.0
--Added a level saving system
--Expanded map area
--Changed cursor texture
+Changelog for v4.0
+-Added controls for mobile
+-Fixed level deleting bug
+-Added a customizable character
