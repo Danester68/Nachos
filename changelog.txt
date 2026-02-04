@@ -2,3 +2,4 @@ Changelog for v4.0
 -Added controls for mobile
 -Fixed level deleting bug
 -Added an option to resume the last saved level.
+-Added ability to save ingredients in level.
