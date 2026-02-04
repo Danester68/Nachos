@@ -19,7 +19,7 @@ public class LoadLevelMenu : MonoBehaviour
 
     void Awake()
     {
-        #if UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL || UNITY_EDITOR
+        #if UNITY_IOS || UNITY_ANDROID || UNITY_WEBGL
             deleteInstructions.SetActive(false);
             confirmDeleteButton.SetActive(true);
         #else
