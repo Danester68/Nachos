@@ -73,6 +73,7 @@ public class SaveLoadLevel : MonoBehaviour
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
         GameObject oven = GameObject.FindGameObjectWithTag("Oven");
         List<Object> objects = new();
+        List<Ingredient> ingredients = new();
         foreach (GameObject tree in trees)
         {
             Object treeObject = new();
@@ -162,6 +163,8 @@ public class SaveLoadLevel : MonoBehaviour
         {
             throw new IncorrectFileStructureException("No oven in level. Level: " + level);
         }
+        #region Unused code
+        /**
         // Ingredients are not yet stored in saves, remove this code chunk once feature is implemented
         GameObject chip = Instantiate(chipGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f, -1), new Quaternion());
         chip.name = "Chip";
@@ -181,6 +184,8 @@ public class SaveLoadLevel : MonoBehaviour
         GameObject lettuce = Instantiate(lettuceGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
         lettuce.name = "Lettuce";
         lettuce.transform.SetParent(levelGameObject.transform);
+        **/
+        #endregion
         Debug.Log("Succeeded at loading level");
         GameParameters.resumeLastLevel = false;
     }

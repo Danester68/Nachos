@@ -12,6 +12,7 @@ public class LevelSaves
 public class LevelSave
 {
     public List<Object> objects;
+    public List<Ingredient> ingredients;
 }
 
 [Serializable]
@@ -21,9 +22,20 @@ public class Object
     public float position;
 }
 
+[Serializable]
+public class Ingredient : Object
+{
+    public new IngredientType type;
+}
+
 public enum ObjectType
 {
     Tree,
     Bush,
     Oven
+}
+
+public enum IngredientType
+{
+    
 }
