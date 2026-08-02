@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -76,21 +77,27 @@ public class SaveLoadLevel : MonoBehaviour
         List<Ingredient> ingredients = new();
         foreach (GameObject tree in trees)
         {
-            Object treeObject = new();
-            treeObject.type = ObjectType.Tree;
-            treeObject.position = tree.transform.position.x;
+            Object treeObject = new()
+            {
+                type = ObjectType.Tree,
+                position = tree.transform.position.x
+            };
             objects.Add(treeObject);
         }
         foreach (GameObject bush in bushes)
         {
-            Object bushObject = new();
-            bushObject.type = ObjectType.Bush;
-            bushObject.position = bush.transform.position.x;
+            Object bushObject = new()
+            {
+                type = ObjectType.Bush,
+                position = bush.transform.position.x
+            };
             objects.Add(bushObject);
         }
-        Object ovenObject = new();
-        ovenObject.type = ObjectType.Oven;
-        ovenObject.position = oven.transform.position.x;
+        Object ovenObject = new()
+        {
+            type = ObjectType.Oven,
+            position = oven.transform.position.x
+        };
         objects.Add(ovenObject);
         levelSave.objects = objects;
         if (isLastLevel)
@@ -163,31 +170,28 @@ public class SaveLoadLevel : MonoBehaviour
         {
             throw new IncorrectFileStructureException("No oven in level. Level: " + level);
         }
-        #region Unused code
-        /**
-        // Ingredients are not yet stored in saves, remove this code chunk once feature is implemented
-        GameObject chip = Instantiate(chipGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f, -1), new Quaternion());
-        chip.name = "Chip";
-        chip.transform.SetParent(levelGameObject.transform);
-        GameObject tomato = Instantiate(tomatoGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
-        tomato.name = "Tomato";
-        tomato.transform.SetParent(levelGameObject.transform);
-        GameObject onion = Instantiate(onionGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
-        onion.name = "Onion";
-        onion.transform.SetParent(levelGameObject.transform);
-        GameObject meat = Instantiate(meatGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
-        meat.name = "Meat";
-        meat.transform.SetParent(levelGameObject.transform);
-        GameObject cheese = Instantiate(cheeseGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
-        cheese.name = "Cheese";
-        cheese.transform.SetParent(levelGameObject.transform);
-        GameObject lettuce = Instantiate(lettuceGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
-        lettuce.name = "Lettuce";
-        lettuce.transform.SetParent(levelGameObject.transform);
-        **/
-        #endregion
-        Debug.Log("Succeeded at loading level");
-        GameParameters.resumeLastLevel = false;
+        if (!isLastLevel)
+        {
+            GameObject chip = Instantiate(chipGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f, -1), new Quaternion());
+            chip.name = "Chip";
+            chip.transform.SetParent(levelGameObject.transform);
+            GameObject tomato = Instantiate(tomatoGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
+            tomato.name = "Tomato";
+            tomato.transform.SetParent(levelGameObject.transform);
+            GameObject onion = Instantiate(onionGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
+            onion.name = "Onion";
+            onion.transform.SetParent(levelGameObject.transform);
+            GameObject meat = Instantiate(meatGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
+            meat.name = "Meat";
+            meat.transform.SetParent(levelGameObject.transform);
+            GameObject cheese = Instantiate(cheeseGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
+            cheese.name = "Cheese";
+            cheese.transform.SetParent(levelGameObject.transform);
+            GameObject lettuce = Instantiate(lettuceGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
+            lettuce.name = "Lettuce";
+            lettuce.transform.SetParent(levelGameObject.transform);
+            Debug.Log("Succeeded at loading level");
+        }
     }
 
     public void DeleteLevel(int level)

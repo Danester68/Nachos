@@ -37,5 +37,10 @@ public enum ObjectType
 
 public enum IngredientType
 {
-    
+    Cheese,
+    Chip,
+    Lettuce,
+    Meat,
+    Onion,
+    Tomato
 }
