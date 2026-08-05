@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -74,7 +73,6 @@ public class SaveLoadLevel : MonoBehaviour
         GameObject[] bushes = GameObject.FindGameObjectsWithTag("Bush");
         GameObject oven = GameObject.FindGameObjectWithTag("Oven");
         List<Object> objects = new();
-        List<Ingredient> ingredients = new();
         foreach (GameObject tree in trees)
         {
             Object treeObject = new()
@@ -102,10 +100,43 @@ public class SaveLoadLevel : MonoBehaviour
         levelSave.objects = objects;
         if (isLastLevel)
         {
+            List<Ingredient> collectedIngredients = new();
+            Ingredient cheese = new()
+            {
+                type = IngredientType.Cheese,
+                position = GameObject.FindGameObjectWithTag("Cheese").transform.position.x
+            };
+            Ingredient chip = new()
+            {
+                type = IngredientType.Chip,
+                position = GameObject.FindGameObjectWithTag("Chip").transform.position.x
+            };
+            Ingredient lettuce = new()
+            {
+                type = IngredientType.Lettuce,
+                position = GameObject.FindGameObjectWithTag("Lettuce").transform.position.x
+            };
+            Ingredient meat = new()
+            {
+                type = IngredientType.Meat,
+                position = GameObject.FindGameObjectWithTag("Meat").transform.position.x
+            };
+            Ingredient onion = new()
+            {
+                type = IngredientType.Onion,
+                position = GameObject.FindGameObjectWithTag("Onion").transform.position.x
+            };
+            Ingredient tomato = new()
+            {
+                type = IngredientType.Tomato,
+                position = GameObject.FindGameObjectWithTag("Tomato").transform.position.x
+            };
+            levelSave.ingredients = new() { cheese, chip, lettuce, meat, onion, tomato };
             levelSaves.lastLevel = levelSave;
         }
         else
         {
+            levelSave.ingredients = new();
             levelSaves.saves.Add(levelSave);
         }
         string jsonContent = JsonUtility.ToJson(levelSaves);
@@ -156,7 +187,6 @@ public class SaveLoadLevel : MonoBehaviour
                     bush.transform.SetParent(levelGameObject.transform);
                     break;
                 case ObjectType.Oven:
-                    Debug.Log("1");
                     GameObject oven = Instantiate(ovenGameObject, new Vector3(levelObject.position, -3f,-1), new Quaternion());
                     oven.name = "Oven";
                     oven.transform.SetParent(levelGameObject.transform);
@@ -190,8 +220,51 @@ public class SaveLoadLevel : MonoBehaviour
             GameObject lettuce = Instantiate(lettuceGameObject, new Vector3(UnityEngine.Random.Range(-ingredientRange, ingredientRange), -3f,-1), new Quaternion());
             lettuce.name = "Lettuce";
             lettuce.transform.SetParent(levelGameObject.transform);
-            Debug.Log("Succeeded at loading level");
         }
+        else
+        {
+            List<Ingredient> ingredients = levelSave.ingredients;
+            for (int i = 0; i < ingredients.Count; i++)
+            {
+                Ingredient levelIngredient = ingredients[i];
+                switch (levelIngredient.type)
+                {
+                    case IngredientType.Cheese:
+                        GameObject cheese = Instantiate(cheeseGameObject, new Vector3(levelIngredient.position, -3f,-1), new Quaternion());
+                        cheese.name = "Cheese";
+                        cheese.transform.SetParent(levelGameObject.transform);
+                        break;
+                    case IngredientType.Chip:
+                        GameObject chip = Instantiate(chipGameObject, new Vector3(levelIngredient.position, -3f, -1), new Quaternion());
+                        chip.name = "Chip";
+                        chip.transform.SetParent(levelGameObject.transform);
+                        break;
+                    case IngredientType.Lettuce:
+                        GameObject lettuce = Instantiate(lettuceGameObject, new Vector3(levelIngredient.position, -3f,-1), new Quaternion());
+                        lettuce.name = "Lettuce";
+                        lettuce.transform.SetParent(levelGameObject.transform);
+                        break;
+                    case IngredientType.Meat:
+                        GameObject meat = Instantiate(meatGameObject, new Vector3(levelIngredient.position, -3f,-1), new Quaternion());
+                        meat.name = "Meat";
+                        meat.transform.SetParent(levelGameObject.transform);
+                        break;
+                    case IngredientType.Onion:
+                        GameObject onion = Instantiate(onionGameObject, new Vector3(levelIngredient.position, -3f,-1), new Quaternion());
+                        onion.name = "Onion";
+                        onion.transform.SetParent(levelGameObject.transform);
+                        break;
+                    case IngredientType.Tomato:
+                        GameObject tomato = Instantiate(tomatoGameObject, new Vector3(levelIngredient.position, -3f,-1), new Quaternion());
+                        tomato.name = "Tomato";
+                        tomato.transform.SetParent(levelGameObject.transform);
+                        break;
+                    default:
+                        throw new IncorrectFileStructureException("Invalid object type. Object: " + i + ", Level: " + level);
+                }
+            }
+        }
+        Debug.Log("Succeeded at loading level");
     }
 
     public void DeleteLevel(int level)
