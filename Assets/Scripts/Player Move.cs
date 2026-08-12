@@ -16,12 +16,12 @@ public class PlayerMove : MonoBehaviour
 
     public int jumpHeight;
 
-    private bool hasChip = false;
-    private bool hasTomato = false;
-    private bool hasOnion = false;
-    private bool hasMeat = false;
-    private bool hasCheese = false;
-    private bool hasLettuce = false;
+    public bool hasChip = false;
+    public bool hasTomato = false;
+    public bool hasOnion = false;
+    public bool hasMeat = false;
+    public bool hasCheese = false;
+    public bool hasLettuce = false;
     private bool hasAll = false;
 
     private bool mobileControlsInUse = false;

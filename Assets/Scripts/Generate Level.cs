@@ -36,7 +36,6 @@ public class GenerateLevel : MonoBehaviour
         generateTrees();
         generateBushes();
         addIngredients();
-        saveLoadLevel.SaveLevel(true);
     }
 
     void destroyLevelData() {

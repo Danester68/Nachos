@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,8 @@ public class MenuScript : MonoBehaviour
 
     public GameObject pauseMenu;
     public GameObject levelMenu;
+
+    [SerializeField] SaveLoadLevel saveLoadLevel;
 
     public void LoadMainMenu() {
         SceneManager.LoadScene("Main Menu");
@@ -33,6 +36,7 @@ public class MenuScript : MonoBehaviour
 
     public void ReturnToMainMenu() {
         Time.timeScale = 1;
+        saveLoadLevel.SaveLevel(true);
         SceneManager.LoadScene("Main Menu");
     }
 

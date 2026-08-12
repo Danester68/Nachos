@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SaveLoadLevel : MonoBehaviour
 {
     [SerializeField] Transform player;
+    [SerializeField] PlayerMove playerMove;
     [SerializeField] GameObject levelGameObject;
     [SerializeField] GameObject treeGameObject;
     [SerializeField] GameObject bushGameObject;
@@ -100,38 +101,116 @@ public class SaveLoadLevel : MonoBehaviour
         levelSave.objects = objects;
         if (isLastLevel)
         {
-            List<Ingredient> collectedIngredients = new();
-            Ingredient cheese = new()
+            levelSave.ingredients = new();
+            levelSave.collectedIngredients = new();
+            try
             {
-                type = IngredientType.Cheese,
-                position = GameObject.FindGameObjectWithTag("Cheese").transform.position.x
-            };
-            Ingredient chip = new()
+                Ingredient cheese = new()
+                {
+                    type = IngredientType.Cheese,
+                    position = GameObject.FindGameObjectWithTag("Cheese").transform.position.x
+                };
+                levelSave.ingredients.Add(cheese);
+            }
+            catch (NullReferenceException)
             {
-                type = IngredientType.Chip,
-                position = GameObject.FindGameObjectWithTag("Chip").transform.position.x
-            };
-            Ingredient lettuce = new()
+                Ingredient cheese = new()
+                {
+                    type = IngredientType.Cheese,
+                    position = 0
+                };
+                levelSave.collectedIngredients.Add(cheese);
+            }
+            try
             {
-                type = IngredientType.Lettuce,
-                position = GameObject.FindGameObjectWithTag("Lettuce").transform.position.x
-            };
-            Ingredient meat = new()
+                Ingredient chip = new()
+                {
+                    type = IngredientType.Chip,
+                    position = GameObject.FindGameObjectWithTag("Chip").transform.position.x
+                };
+                levelSave.ingredients.Add(chip);
+            }
+            catch (NullReferenceException)
             {
-                type = IngredientType.Meat,
-                position = GameObject.FindGameObjectWithTag("Meat").transform.position.x
-            };
-            Ingredient onion = new()
+                Ingredient chip = new()
+                {
+                    type = IngredientType.Chip,
+                    position = 0
+                };
+                levelSave.collectedIngredients.Add(chip);
+            }
+            try
             {
-                type = IngredientType.Onion,
-                position = GameObject.FindGameObjectWithTag("Onion").transform.position.x
-            };
-            Ingredient tomato = new()
+                Ingredient lettuce = new()
+                {
+                    type = IngredientType.Lettuce,
+                    position = GameObject.FindGameObjectWithTag("Lettuce").transform.position.x
+                };
+                levelSave.ingredients.Add(lettuce);
+            }
+            catch (NullReferenceException)
             {
-                type = IngredientType.Tomato,
-                position = GameObject.FindGameObjectWithTag("Tomato").transform.position.x
-            };
-            levelSave.ingredients = new() { cheese, chip, lettuce, meat, onion, tomato };
+                Ingredient lettuce = new()
+                {
+                    type = IngredientType.Lettuce,
+                    position = 0
+                };
+                levelSave.collectedIngredients.Add(lettuce);
+            }
+            try
+            {
+                Ingredient meat = new()
+                {
+                    type = IngredientType.Meat,
+                    position = GameObject.FindGameObjectWithTag("Meat").transform.position.x
+                };
+                levelSave.ingredients.Add(meat);
+            }
+            catch (NullReferenceException)
+            {
+                Ingredient meat = new()
+                {
+                    type = IngredientType.Meat,
+                    position = 0
+                };
+                levelSave.collectedIngredients.Add(meat);
+            }
+            try
+            {
+                Ingredient onion = new()
+                {
+                    type = IngredientType.Onion,
+                    position = GameObject.FindGameObjectWithTag("Onion").transform.position.x
+                };
+                levelSave.ingredients.Add(onion);
+            }
+            catch (NullReferenceException)
+            {
+                Ingredient onion = new()
+                {
+                    type = IngredientType.Onion,
+                    position = 0
+                };
+                levelSave.collectedIngredients.Add(onion);
+            }
+            try
+            {
+                Ingredient tomato = new()
+                {
+                    type = IngredientType.Tomato,
+                    position = GameObject.FindGameObjectWithTag("Tomato").transform.position.x
+                };
+                levelSave.ingredients.Add(tomato);
+            }
+            catch (NullReferenceException)
+            {
+                Ingredient tomato = new()
+                {
+                    type = IngredientType.Tomato,
+                    position = 0
+                };
+                levelSave.collectedIngredients.Add(tomato);
+            }
             levelSaves.lastLevel = levelSave;
         }
         else
@@ -260,7 +339,35 @@ public class SaveLoadLevel : MonoBehaviour
                         tomato.transform.SetParent(levelGameObject.transform);
                         break;
                     default:
-                        throw new IncorrectFileStructureException("Invalid object type. Object: " + i + ", Level: " + level);
+                        throw new IncorrectFileStructureException("Invalid ingredient type. Ingredient: " + i + ", Level: " + level);
+                }
+            }
+            List<Ingredient> collectedIngredients = levelSave.collectedIngredients;
+            for (int i = 0; i < collectedIngredients.Count; i++)
+            {
+                Ingredient collectedIngredient = collectedIngredients[i];
+                switch (collectedIngredient.type)
+                {
+                    case IngredientType.Cheese:
+                        playerMove.hasCheese = true;
+                        break;
+                    case IngredientType.Chip:
+                        playerMove.hasChip = true;
+                        break;
+                    case IngredientType.Lettuce:
+                        playerMove.hasLettuce = true;
+                        break;
+                    case IngredientType.Meat:
+                        playerMove.hasMeat = true;
+                        break;
+                    case IngredientType.Onion:
+                        playerMove.hasOnion = true;
+                        break;
+                    case IngredientType.Tomato:
+                        playerMove.hasTomato = true;
+                        break;
+                    default:
+                        throw new IncorrectFileStructureException("Invalid ingredient type. Ingredient: " + i + ", Level: " + level);
                 }
             }
         }
